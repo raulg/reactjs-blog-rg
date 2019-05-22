@@ -55,7 +55,7 @@ const BlogHome = () => {
   return (
     <Fragment>
       {
-        home ? (
+        home && posts ? (
           <div>
             <Helmet>
               <title>{RichText.asText(home.data.headline)}</title>

@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import qs from 'qs'
 
+import { locationPropType, historyPropType } from './utils/propTypes'
 import { client, linkResolver } from './prismic-configuration'
 
 const Preview = ({ history, location }) => {
@@ -16,6 +17,11 @@ const Preview = ({ history, location }) => {
     client.previewSession(params.token, linkResolver, '/').then(url => history.push(url))
   })
   return null
+}
+
+Preview.propTypes = {
+  location: locationPropType.isRequired,
+  history: historyPropType.isRequired
 }
 
 export default Preview

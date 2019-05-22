@@ -1,4 +1,5 @@
 import React from 'react'
+import { shape, array } from 'prop-types'
 import { RichText } from 'prismic-reactjs'
 
 const Text = ({ slice, prismicCtx }) => {
@@ -9,6 +10,14 @@ const Text = ({ slice, prismicCtx }) => {
       </div>
     </div>
   )
+}
+
+Text.propTypes = {
+  slice: shape({
+    primary: shape({
+      text: array.isRequired
+    })
+  })
 }
 
 export default Text

@@ -1,5 +1,7 @@
 import React from 'react'
+import { shape, array } from 'prop-types'
 import { RichText } from 'prismic-reactjs'
+import { imagePropType } from '../../utils/propTypes'
 
 const ImageCaption = ({ slice }) => {
   const defaultView = () => {
@@ -51,6 +53,15 @@ const ImageCaption = ({ slice }) => {
     default:
       return defaultView()
   }
+}
+
+ImageCaption.propTypes = {
+  slice: shape({
+    primary: shape({
+      image: imagePropType.isRequired,
+      caption: array
+    })
+  })
 }
 
 export default ImageCaption
