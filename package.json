@@ -3,7 +3,6 @@
   "version": "0.2.0",
   "private": true,
   "dependencies": {
-    "highlight.js": "~9.13.1",
     "prismic-javascript": "^2.0.3",
     "prismic-reactjs": "^0.3.2",
     "qs": "^6.7.0",
@@ -14,8 +13,7 @@
     "whatwg-fetch": "~3.0.0"
   },
   "devDependencies": {
-    "react-scripts": "^3.0.1",
-    "react-svg-loader": "^3.0.1"
+    "react-scripts": "^3.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
