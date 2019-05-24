@@ -26,6 +26,9 @@ Build and open your browser to http://localhost:3000.
 > $ npm run build
 ```
 
+### Deployment
+This project is ready for deployment using [Netlify](https://www.netlify.com), thanks to the addition of a `_redirects` file located in the public folder. If you're interested in deploying to other platforms review the suggested [solutions](https://facebook.github.io/create-react-app/docs/deployment).
+
 ### Get started with Prismic
 
 You can find out how to get started with Prismic from [our React documentation](https://prismic.io/docs/reactjs/getting-started/getting-started-from-scratch).

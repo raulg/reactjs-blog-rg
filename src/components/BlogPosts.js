@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { RichText, Date } from 'prismic-reactjs'
+import { Date, RichText } from 'prismic-reactjs'
 import { linkResolver } from '../prismic-configuration'
 
 const BlogPosts = ({ posts }) => {

@@ -1,33 +1,33 @@
-import React, { useEffect, useState, Fragment } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet'
 import { RichText } from 'prismic-reactjs'
 import { Predicates } from 'prismic-javascript'
+import { AuthorHeader, Loader, Footer, BlogPosts } from '../components'
 import NotFound from './NotFound'
-import { Loader, Footer, BlogPosts } from '../components'
 import { client } from '../prismic-configuration'
 
 const BlogHome = () => {
-  const [loading, setLoading] = useState(true)
-  const [home, setHomeData] = useState(null)
-  const [posts, setPostsData] = useState(null)
+  const [homeData, setHomeData] = useState({ home: null, loading: true })
+  const [postsData, setPostsData] = useState({ posts: null, loading: true })
 
   useEffect(() => {
     const fetchData = async () => {
       const result = await client.getSingle('blog_home')
       if (result) {
         window.PrismicToolbar.setupEditButton()
-        setHomeData(result)
+        setHomeData({ home: result, loading: false })
       } else {
+        setHomeData({ loading: false })
         console.warn('Blog Home document not found. Make sure it exists in your Prismic repository')
       }
-      setLoading(false)
     }
 
     const fetchPosts = async () => {
       const result = await client.query(Predicates.at('document.type', 'post'), { orderings: '[my.post.date desc]' })
       if (result) {
-        setPostsData(result)
+        setPostsData({ posts: result, loading: false })
       } else {
+        setPostsData({ loading: false })
         console.warn('Blog posts not found. Make sure they exist in your Prismic repository')
       }
     }
@@ -36,32 +36,20 @@ const BlogHome = () => {
     fetchData()
   }, [])
 
-  const blogHomeHead = () => {
-    // Using the queried blog_home document data, we render the top section
-    const avatar = { backgroundImage: 'url(' + home.data.image.url + ')' }
-    return (
-      <div className='home'>
-        <div className='blog-avatar' style={avatar} />
-        <h1 className='blog-title'>{RichText.asText(home.data.headline)}</h1>
-        <p className='blog-description'>{RichText.asText(home.data.description)}</p>
-      </div>
-    )
-  }
-
-  if (loading) {
+  if (homeData.loading) {
     return <Loader />
   }
 
   return (
     <Fragment>
       {
-        home && posts ? (
+        homeData.home ? (
           <div>
             <Helmet>
-              <title>{RichText.asText(home.data.headline)}</title>
+              <title>{RichText.asText(homeData.home.data.headline)}</title>
             </Helmet>
-            {blogHomeHead()}
-            <BlogPosts posts={posts.results} />
+            {!homeData.loading ? <AuthorHeader author={homeData.home.data} /> : <Loader />}
+            {!postsData.loading ? <BlogPosts posts={postsData.posts.results} /> : <Loader />}
             <Footer />
           </div>
 
