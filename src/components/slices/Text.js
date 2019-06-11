@@ -6,7 +6,7 @@ const Text = ({ slice, prismicCtx }) => {
   return (
     <div className='post-part single container'>
       <div>
-        {RichText.render(slice.primary.text, prismicCtx.linkResolver)}
+        <RichText render={slice.primary.text} linkResolver={prismicCtx.linkResolver} />
       </div>
     </div>
   )

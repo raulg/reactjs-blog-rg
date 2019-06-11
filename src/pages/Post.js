@@ -35,7 +35,11 @@ const Post = ({ match: { params: { uid } } }) => {
         doc.post ? (
           <div className='main'>
             <Helmet>
-              <title>{doc.post.data.title.length !== 0 ? RichText.asText(doc.post.data.title) : 'Untitled'}</title>
+              <title>
+                {doc.post.data.title.length !== 0
+                  ? RichText.asText(doc.post.data.title)
+                  : 'Untitled'}
+              </title>
             </Helmet>
             <div className='outer-container'>
               <div className='back'>
@@ -43,7 +47,9 @@ const Post = ({ match: { params: { uid } } }) => {
               </div>
               {/* Render the edit button */}
               <h1 data-wio-id={doc.post.id}>
-                {doc.post.data.title.length !== 0 ? RichText.asText(doc.post.data.title) : 'Untitled'}
+                {doc.post.data.title.length !== 0
+                  ? RichText.asText(doc.post.data.title)
+                  : 'Untitled'}
               </h1>
             </div>
             {/* Go through the slices of the post and render the appropiate one */}

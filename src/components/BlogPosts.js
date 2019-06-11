@@ -40,7 +40,9 @@ const BlogPosts = ({ posts }) => {
             <h2>
               {/* We render a link to a particular post using the linkResolver for the url and its title */}
               <Link to={linkResolver(post)}>
-                {post.data.title.length !== 0 ? RichText.render(post.data.title, linkResolver) : defaultTitle}
+                {post.data.title.length !== 0
+                  ? <RichText render={post.data.title} />
+                  : defaultTitle}
               </Link>
             </h2>
             <p className='blog-post-meta'>
